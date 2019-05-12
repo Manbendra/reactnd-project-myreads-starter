@@ -11,14 +11,15 @@ class Search extends React.Component {
 
     onSearchQueryChange = (query) => {
         BooksAPI.search(query).then((books) => {
-            let newBooks
-            if(Array.isArray(books) === false){
-                newBooks = []
+            if(query === '' || Array.isArray(books) === false){
+                books = []
             }
-            newBooks = books.map((book) => {
+            let newBooks = books.map((book) => {
                 const index = this.state.booksOnShelf.findIndex(s => s.id === book.id)
                 if(this.state.booksOnShelf[index]){
                     book.shelf = this.state.booksOnShelf[index].shelf
+                }else{
+                    book.shelf = 'none'
                 }
                 return book
             })
@@ -68,7 +69,6 @@ class Search extends React.Component {
                         type="text"
                         placeholder="Search by title or author"
                         onChange={(event) => this.onSearchQueryChange(event.target.value)} />
-
                     </div>
                 </div>
                 <div className="search-books-results">
