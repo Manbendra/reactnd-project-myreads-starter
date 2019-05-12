@@ -9,7 +9,7 @@ class Book extends React.Component{
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''})` }}></div>
                     <div className="book-shelf-changer">
-                        <select onChange={(event) => this.props.onShelfChange(this.props.id, event.target.value)}>
+                        <select onChange={(event) => this.props.onShelfChange(this.props.book.id, event.target.value)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading" selected={this.props.book.shelf === 'currentlyReading'}>Currently Reading</option>
                             <option value="wantToRead" selected={this.props.book.shelf === 'wantToRead'}>Want to Read</option>

@@ -20,11 +20,11 @@ class Search extends React.Component {
                 if(this.state.booksOnShelf[index]){
                     book.shelf = this.state.booksOnShelf[index].shelf
                 }
-                return {book}
+                return book
             })
             this.setState((state) => ({
                 ...state,
-                newBooks
+                books: newBooks
             }))
         })
     }
@@ -39,7 +39,7 @@ class Search extends React.Component {
                 })
             return {
                 ...state,
-                newBooks
+                books: newBooks
             }
         })
         BooksAPI.update({id: id},value)
@@ -50,7 +50,7 @@ class Search extends React.Component {
         .then(books => {
             this.setState((state) => ({
                 ...state,
-                books
+                booksOnShelf: books
             }))
         })
     }
@@ -74,7 +74,7 @@ class Search extends React.Component {
                 <div className="search-books-results">
                     <ol className="books-grid"></ol>
                     {this.state.books.map((book)=> (
-                      <li>
+                      <li key={book.id}>
                         <Book book={book} onShelfChange={this.onBookShelfChange}/>
                       </li>
                     ))}
